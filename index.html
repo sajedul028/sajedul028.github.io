@@ -118,8 +118,8 @@
 
 
         function watchAd() {
-            if (typeof show_9506500 === 'function') {
-                show_9506500().then(() => {
+            if (typeof show_2942976 === 'function') {
+                show_2942976().then(() => {
                     watchedAds++;
                     earnedPoints += 0.1;
                     localStorage.setItem('watchedAds', watchedAds);
@@ -144,22 +144,32 @@
         }
 
         function withdrawPoints() {
-            const amount = parseFloat(document.getElementById('withdraw-amount').value);
-            const method = document.getElementById('payment-method').value;
-            const phone = document.getElementById('phone-number').value;
+    const amountInput = document.getElementById('withdraw-amount').value.trim();
+    const method = document.getElementById('payment-method').value;
+    const phone = document.getElementById('phone-number').value.trim();
+    const telegramUser = document.getElementById('telegram-username').value.trim();
+    if (!amountInput) {
+        alert('Please enter a withdrawal amount.');
+        return;
+    }
 
-            if (amount < 20 || amount > earnedPoints) {
-                alert('Invalid withdrawal amount.');
-                return;
-            }
+    const amount = parseFloat(amountInput);
+
+            if (isNaN(amount) || amount < 20 || amount > earnedPoints) {
+        alert('Withdrawal amount must be at least ৳20 and not more than your earned points.');
+        return;
+    }
 
             earnedPoints -= amount;
             localStorage.setItem('earnedPoints', earnedPoints.toFixed(2));
             document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
 
-            const message = `Withdrawal Request:\nAmount: ${amount} BDT\nMethod: ${method}\nPhone: ${phone}`;
-            sendTelegramMessage(message);
-        }
+            const message = `📤 Withdrawal Request:\n\n📌 Amount: ৳${amount}\n📱 Method: ${method}\n📞 Phone: ${phone}\n👤 Telegram: ${telegramUser}`;
+
+    sendTelegramMessage(message);
+
+    alert("✅ Withdrawal request submitted successfully!");
+}
 
         function sendTelegramMessage(msg) {
             const botToken = "8112346267:AAGUCEDWYCCaQfGYXZ6LpJgkzyzWS_O77Y8";
@@ -170,6 +180,6 @@
                 .catch(error => console.error('Error:', error));
         }
     </script>
-     <script src='https://libtl.com/sdk.js' data-zone='9506500' data-sdk='show_9506500'></script>
+     <script src='//whephiwums.com/vignette.min.js' data-zone='2942976' data-sdk='show_2942976'></script>
 </body>
 </html>
