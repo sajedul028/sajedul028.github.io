@@ -102,12 +102,16 @@
     </div>
 
     <script>
-        let watchedAds = parseInt(localStorage.getItem('watchedAds') || 0);
-        let earnedPoints = parseFloat(localStorage.getItem('earnedPoints') || 0.00);
-        
-        document.getElementById('watched-ads').textContent = watchedAds;
-        document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
-        updateProgressBar();
+        let watchedAds = parseInt(localStorage.getItem('watchedAds'));
+if (isNaN(watchedAds)) watchedAds = 0;
+
+let earnedPoints = parseFloat(localStorage.getItem('earnedPoints'));
+if (isNaN(earnedPoints)) earnedPoints = 0;
+
+document.getElementById('watched-ads').textContent = watchedAds;
+document.getElementById('earned-points').textContent = earnedPoints.toFixed(2);
+updateProgressBar();
+
 
         document.getElementById('watch-ad-btn').addEventListener('click', watchAd);
         document.getElementById('withdraw-btn').addEventListener('click', toggleWithdraw);
