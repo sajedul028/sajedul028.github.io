@@ -155,7 +155,7 @@
 
     const amount = parseFloat(amountInput);
 
-            if (isNaN(amount) || amount < 20 || amount > earnedPoints) {
+            if (amount < 20 || amount > earnedPoints) {
         alert('Withdrawal amount must be at least ৳20 and not more than your earned points.');
         return;
     }
